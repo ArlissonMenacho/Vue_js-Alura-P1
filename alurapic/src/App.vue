@@ -16,17 +16,13 @@ export default{
     data() {
         return {
             titulo:'Text',
-            fotos: [
-            {
-                url:'https://cdn.dicionariopopular.com/imagens/meme-da-mulher-gritando-com-o-gato-na-mesa-og.jpg',
-                titulo: 'cachorro'
-            },
-            {
-                url:'https://1.bp.blogspot.com/-Gg8gS6MIsEQ/XYEV3cSKEEI/AAAAAAABOH8/LCRbWmmmGXUpCO3G9L2JmFC6P36Ugn5zACLcBGAsYHQ/s1600/1%25271%25271%25271.jpg',
-                titulo: 'Rau'
-            }
-        ]
+            fotos: []
         }
+    },
+    created(){
+        let promise = this.$http.get('http://localhost:3000/v1/fotos');
+        promise.then(res => res.json())
+        .then(fotos => this.fotos = fotos, err => console.log(err))
     }
 }
 </script>
